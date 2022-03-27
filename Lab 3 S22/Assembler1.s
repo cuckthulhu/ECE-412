@@ -97,6 +97,16 @@ D1:	dec		r17				//student comment here
 	brne	D0				//student comment here
 	ret						//student comment here
 
+.global LCD_Banner
+LCD_Banner:
+	call	LCD_Write_Command	//LCD command to shift display right
+	call	LCD_Delay		//call to LCD Delay
+	call	LCD_Delay		//call to LCD Delay
+	lds	r16,UCSR0A		//
+	sbrs	r16,RXC0		//student comment here
+	rjmp	LCD_Banner		//student comment here
+	ret				//student comment here
+
 .global LCD_Write_Data
 LCD_Write_Data:
 	call	UART_Off		//student comment here
