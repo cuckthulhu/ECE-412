@@ -24,6 +24,7 @@ void UART_Put(void);
 void LCD_Write_Data(void);
 void LCD_Write_Command(void);
 void LCD_Read_Data(void);
+void LCD_Banner(void);
 void Mega328P_Init(void);
 void ADC_Get(void);
 void EEPROM_Read(void);
@@ -80,13 +81,10 @@ void LCD(void)						//Lite LCD demo
 	LCD_Write_Command();
 	DATA = 0x0f;					//Student Comment Here
 	LCD_Write_Command();
-	LCD_Puts("Hello ECE412!");
-	/*
-	Re-engineer this subroutine to have the LCD endlessly scroll a marquee sign of 
-	your Team's name either vertically or horizontally. Any key press should stop
-	the scrolling and return execution to the command line in Terminal. User must
-	always be able to return to command line.
-	*/
+	LCD_Puts("Team 10!");
+		
+	DATA = 0x1c;
+	LCD_Banner();
 }
 
 void ADC(void)						//Lite Demo of the Analog to Digital Converter
