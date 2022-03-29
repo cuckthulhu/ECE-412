@@ -29,6 +29,7 @@ void Mega328P_Init(void);
 void ADC_Get(void);
 void EEPROM_Read(void);
 void EEPROM_Write(void);
+void UART_Settings(void);
 
 unsigned char ASCII;			//shared I/O variable with Assembly
 unsigned char DATA;				//shared internal variable with Assembly
@@ -47,6 +48,11 @@ void UART_Puts(const char *str)	//Display a string in the PC Terminal Program
 	}
 }
 
+void Reconfigure(void)
+{
+	UART_Puts("Change settings to: \n\r Baudrate: 4800\n\r Parity: Even\n\r Stop Bit: 2\n\rCharacter size: 7-bit\n\r);
+	UART_Settings();
+}
 void LCD_Puts(const char *str)	//Display a string on the LCD Module
 {
 	while (*str)
@@ -150,6 +156,7 @@ void Command(void)					//command interpreter
 		break;
 		case 'E' | 'e': EEPROM();
 		break;
+		case 'U' | 'u': Reconfigure();
 		default:
 		UART_Puts(MS5);
 		HELP();
