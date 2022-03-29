@@ -254,7 +254,19 @@ EEPROM_Read:
 		sts		ASCII,r16  
 		ret
 
-
+.global UART_Settings
+UART_Settings:
+		ldi	r17,0x0			;0000 0000
+		ldi	r16,0xCF		;1100 1111
+		sts	UBRR0H,r17		;4800 baud rate
+		sts	UBRR0L,r16		
+		clr	r16
+		clr	r17
+		ldi	r16,44			;0010 1100
+		sts	UCSR0C,r16		;(00) Asych, 10-Even Parity
+						;(1) - 2bit stop bit, 7-bit size
+		ret
+		
 		.end
 
 	
